@@ -1,0 +1,13 @@
+## This file must *NOT* be checked into Version Control Systems,
+## as it contains information specific to your local installation of the Android SDK.
+## The local.properties file is listed in .gitignore.
+##
+## Location of the Android SDK. This is only used by Gradle.
+## For customization when using a version of the Android SDK other than the one bundled with Unity,
+## copy this file to android/local.properties and set sdk.dir to your Android SDK path.
+## This ensures a single ADB instance is used and avoids conflicts with Unity's bundled SDK.
+##
+## On Windows:
+# sdk.dir=C\:\\Users\\USERNAME\\AppData\\Local\\Android\\Sdk
+## On macOS/Linux:
+# sdk.dir=/Users/USERNAME/Library/Android/sdk

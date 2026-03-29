@@ -48,7 +48,48 @@ A basic react native app with [`react-native-firebase`](https://github.com/inver
 - 4.3) **[Android]** If you haven't already got an android device attached/emulator running then you'll need to get one running (make sure the emulator is with Google Play / APIs). When ready run `npm run android` or `yarn run android` from the root of your project.
 
 If all has gone well you'll see an initial screen like the one below.
-  
+
+---
+
+## Troubleshooting
+
+### Multiple ADB server instances (Unity conflict)
+
+If you see a warning like:
+
+```
+Multiple ADB server instances found, the following ADB server instance have been terminated
+due to being run from another SDK. If instance restarts during deployment, this may cause
+unexpected issues. Please check that ADB versions are consistent across instances.
+Process paths: C:\Program Files\Unity\Hub\Editor\...\platform-tools\adb.exe
+```
+
+This happens when Unity's bundled Android SDK ADB conflicts with the system Android SDK ADB.
+To resolve this, choose **one** of the following options:
+
+**Option A – Point Unity to your system Android SDK (recommended)**
+
+1. Open Unity and go to **Edit > Preferences > External Tools** (Windows/Linux) or **Unity > Preferences > External Tools** (macOS).
+2. Under the **Android** section, uncheck `Android SDK Tools Installed with Unity (recommended)`.
+3. Set the **SDK** path to your standalone Android SDK directory (e.g. `C:\Users\USERNAME\AppData\Local\Android\Sdk` on Windows or `~/Library/Android/sdk` on macOS).
+4. This ensures Unity and React Native share the same ADB, eliminating the conflict.
+
+**Option B – Configure `local.properties` in the Android project**
+
+1. Copy `android/local.properties.sample` to `android/local.properties`.
+2. Uncomment and set the `sdk.dir` line to your standalone Android SDK path.
+3. This tells Gradle's Android tooling to use the specified SDK/ADB rather than any bundled one.
+
+**Option C – Use a single ADB before deploying**
+
+1. Before running `npm run android`, kill any running ADB processes:
+   - **Windows**: `taskkill /F /IM adb.exe`
+   - **macOS/Linux**: `killall adb`
+2. Then run `adb start-server` once from the system Android SDK's `platform-tools` directory.
+3. Subsequent connections from both Unity and React Native will reuse this single server.
+
+---
+
 ## Screenshots
 
 ![preview](https://i.imgur.com/4lG4HuS.png)
