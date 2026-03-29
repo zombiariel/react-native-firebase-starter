@@ -48,6 +48,37 @@ A basic react native app with [`react-native-firebase`](https://github.com/inver
 - 4.3) **[Android]** If you haven't already got an android device attached/emulator running then you'll need to get one running (make sure the emulator is with Google Play / APIs). When ready run `npm run android` or `yarn run android` from the root of your project.
 
 If all has gone well you'll see an initial screen like the one below.
+
+---
+
+### Troubleshooting
+
+#### Multiple ADB server instances (Unity conflict)
+
+If you have **Unity** installed alongside Android Studio or the React Native Android SDK, you may see a warning like:
+
+```
+Multiple ADB server instances found, the following ADB server instance have been terminated
+due to being run from another SDK. If instance restarts during deployment, this may cause
+unexpected issues. Please check that ADB versions are consistent across instances.
+Process paths:
+C:\Program Files\Unity\Hub\Editor\<version>\Editor\Data\PlaybackEngines\AndroidPlayer\SDK\platform-tools\adb.exe
+```
+
+This happens because Unity bundles its own copy of the Android SDK (including `adb.exe`). When two separate ADB instances start from different SDK locations they conflict with each other.
+
+**Resolution:**
+
+1. Copy `android/local.properties.example` to `android/local.properties` and set `sdk.dir` to the path of your standalone Android SDK (e.g. the one installed by Android Studio):
+   ```
+   # Windows
+   sdk.dir=C\:\\Users\\<username>\\AppData\\Local\\Android\\Sdk
+   # macOS / Linux
+   sdk.dir=/Users/<username>/Library/Android/sdk
+   ```
+2. In the Unity Editor, go to **Edit → Preferences → External Tools** and under the **Android** section, uncheck *Android SDK Tools Installed with Unity*. Point the SDK field to the same path used in `local.properties`.
+
+Both tools will then share a single ADB binary, and the warning will no longer appear.
   
 ## Screenshots
 

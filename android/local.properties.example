@@ -1,0 +1,35 @@
+## This file must *NOT* be checked into Version Control Systems,
+## as it contains information specific to your local installation.
+##
+## Location of the SDK. This is only used by Gradle.
+## Copy this file to local.properties and update the sdk.dir path below.
+#
+# On Windows, use double backslashes:
+# sdk.dir=C\:\\Users\\username\\AppData\\Local\\Android\\Sdk
+#
+# On Mac or Linux, use a forward slash:
+# sdk.dir=/Users/username/Library/Android/sdk
+# sdk.dir=/home/username/Android/Sdk
+
+## IMPORTANT: ADB Conflict with Unity
+## -------------------------------------
+## If you have Unity installed alongside Android Studio (or the React Native
+## Android SDK), you may encounter the following warning during deployment:
+##
+##   "Multiple ADB server instances found, the following ADB server instance
+##    have been terminated due to being run from another SDK."
+##
+## This happens because Unity 6 (and some earlier versions) bundles its own
+## copy of the Android SDK (including adb.exe) inside:
+##   C:\Program Files\Unity\Hub\Editor\<version>\Editor\Data\PlaybackEngines\AndroidPlayer\SDK\
+##
+## To resolve this conflict, set the sdk.dir below to point to a *single*,
+## shared Android SDK installation (e.g. the one installed by Android Studio).
+## Then configure Unity to use the same external SDK:
+##   Unity > Edit > Preferences > External Tools > Android > Android SDK Tools Installed with Unity (uncheck)
+##   and point it to the same sdk.dir path specified here.
+##
+## This ensures that both React Native and Unity use the same ADB binary,
+## eliminating the "Multiple ADB server instances" warning.
+
+sdk.dir=C\:\\Users\\username\\AppData\\Local\\Android\\Sdk
