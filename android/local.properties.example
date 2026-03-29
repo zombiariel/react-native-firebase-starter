@@ -1,0 +1,18 @@
+## This file is a template for android/local.properties.
+## Copy this file to android/local.properties and fill in the path to your Android SDK.
+## local.properties is listed in .gitignore and must NOT be committed to source control.
+
+## Set sdk.dir to the Android SDK that all your tools (Android Studio, React Native, Unity)
+## share, so only ONE adb server ever starts.
+##
+## Common locations:
+##   Windows : sdk.dir=C\:\\Users\\<YourName>\\AppData\\Local\\Android\\Sdk
+##   macOS   : sdk.dir=/Users/<YourName>/Library/Android/sdk
+##   Linux   : sdk.dir=/home/<YourName>/Android/Sdk
+##
+## If you use Unity, make sure Unity's "Preferences > External Tools > Android SDK Tools"
+## points to the SAME directory you set here (or disable Unity's bundled SDK so it falls
+## back to this path).  Using different SDK paths causes the "Multiple ADB server instances
+## found" warning and may interfere with device deployments.
+
+sdk.dir=
