@@ -54,6 +54,51 @@ If all has gone well you'll see an initial screen like the one below.
 ![preview](https://i.imgur.com/4lG4HuS.png)
 
 
+## Troubleshooting
+
+### "Multiple ADB server instances found" warning (Unity / Unity 6)
+
+If you develop with both Unity and React Native you may see a message similar to:
+
+```
+Multiple ADB server instances found, the following ADB server instance have been
+terminated due to being run from another SDK.
+If instance restarts during deployment, this may cause unexpected issues. Please
+check that ADB versions are consistent across instances.
+Process paths:
+C:\Program Files\Unity\Hub\Editor\<version>\Editor\Data\PlaybackEngines\AndroidPlayer\SDK\platform-tools\adb.exe
+```
+
+**Root cause:** Unity bundles its own Android SDK (including `adb.exe`) inside its
+installation directory.  When both Unity and React Native attempt to start an ADB
+server from different SDK locations, only one can own the server socket; the other
+is terminated and the warning is emitted.
+
+**Fix – use a single Android SDK for all tools:**
+
+1. Copy `android/local.properties.example` to `android/local.properties` and set
+   `sdk.dir` to the path of your standalone Android SDK (the one installed by
+   Android Studio or the Android command-line tools), for example:
+
+   ```
+   # Windows
+   sdk.dir=C\:\\Users\\YourName\\AppData\\Local\\Android\\Sdk
+
+   # macOS / Linux
+   sdk.dir=/Users/YourName/Library/Android/sdk
+   ```
+
+2. In Unity, go to **Edit > Preferences > External Tools** and, under
+   **Android**, uncheck *"Android SDK Tools Installed with Unity (Recommended)"*,
+   then browse to the **same SDK directory** you entered in `sdk.dir`.
+
+3. Restart both Unity and any running React Native / Metro processes so that both
+   tools pick up the new setting and share a single ADB server.
+
+> **Note:** `android/local.properties` is already listed in `.gitignore` and must
+> **not** be committed to source control as it contains machine-specific paths.
+
+
 ## Contributors
 
 This project exists thanks to all the people who contribute. [[Contribute]](https://github.com/invertase/react-native-firebase/blob/master/CONTRIBUTING.md).
